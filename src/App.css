@@ -7,6 +7,25 @@
   pointer-events: none;
 }
 
+header li{
+  display: flex;
+  align-items: center; 
+  justify-content: center;  
+}
+.imgLogo{
+  width: 40px;
+  height: 40px;
+}
+.container {
+  margin-left: 20%;
+}
+#form{
+  display: flex;
+  
+}
+footer{
+  height: 100px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
