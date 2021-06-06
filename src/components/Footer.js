@@ -2,9 +2,47 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer >
-      <h5 className="text-center text-white">João Victor</h5>
-    </footer>
+    <div>
+      <footer id="footer">
+        <div className="footer-top bg-dark text-white mt-5 p-3">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-3 col-md-6 footer-contact">
+                <h3>Masso<span className="text-danger">terapia</span></h3>
+                <p>
+                  108 Barra
+                  Bahia, Salvador 535022
+                  Imperio
+                  <strong>Email:</strong><p>massoterapia@example.com</p>
+                </p>
+              </div>
+
+              <div className="col-lg-2 col-md-6 footer-links">
+                <h4>Todos os links</h4>
+                <ul className="list-ul-Footer">
+                  <li className="list-li-Footer "><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none" href="/">Home</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary  text-decoration-none"href="#sobre">Sobre-nós</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#servicos">Serviços</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="/">Termo de serviços</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="/">Politica de privacidade</a></li>
+                </ul>
+              </div>
+
+              <div class="col-lg-3 col-md-6 footer-links ">
+                <h4>Desenvolvedores</h4>
+                <ul className="list-ul-Footer">
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">João Victor</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">Tiago Gomes</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">Alessandra</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">Edson</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">Alcimar</a></li>  
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   )
 }
 
