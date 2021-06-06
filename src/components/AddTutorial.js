@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import TutorialDataService from "../services/TutorialDataService";
+import Header from './Header'
+import {Link} from 'react-router-dom'
 
 const AddTutorial = () => {
   const initialTutorialState = {
@@ -80,6 +82,26 @@ const AddTutorial = () => {
 
   return (
     <div className="submit-form">
+      <Header>
+        <li className="nav-item active mr-5">
+          <Link to={'/'} className="nav-link text-dark h3">Masso<span className="text-menu">terapia</span></Link>
+        </li>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item active ml-5">
+            <Link to={'/Clientes'} className="nav-link text-dark">Clientes</Link>           
+          </li>
+          <li className="nav-item">
+            <Link to={"/add"} className="nav-link text-dark">
+               Adicionar
+             </Link>
+          </li>
+          <div className=" collapse navbar-collapse justify-content-end">
+             <li className="nav-item text-dark "> 
+                Bem vindo Administrador
+             </li>
+          </div>
+        </div>
+      </Header>
       {submitted ? (
         <div>
 {/*           <h4>You submitted successfully!</h4>

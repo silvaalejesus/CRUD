@@ -142,12 +142,11 @@ const Tutorial = props => {
           </li>
 
           <li className="nav-item">
-            <Link to={"/add"} className="nav-link text-darke">
+            <Link to={"/add"} className="nav-link text-dark">
               Adicionar
             </Link>
           </li>
-
-          <li className="nav-item text-white"> 
+          <li className="nav-item text-dark"> 
               Bem vindo Administrador
           </li>
         </div>
@@ -532,7 +531,7 @@ const Tutorial = props => {
             Deletar
           </button>
           
-          <Link to="/">
+          <Link to="/clientes">
             <button
               type="submit"
               className="btn btn-warning"

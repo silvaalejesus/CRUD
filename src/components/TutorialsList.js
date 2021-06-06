@@ -107,7 +107,7 @@ const TutorialsList = () => {
                   <td> <Link to={"/tutorials/" + tutorial.nomeCliente}
                     className="btn btn-warning">Editar</Link>
                   </td>
-                  <td> <Link onClick={() => deleteTutorial(tutorial.nomeCliente)}
+                  <td onClick={() => findByTitle()}><Link onClick={() => deleteTutorial(tutorial)}
                     className="btn btn-danger">Deletar</Link>
                   </td>
                 </tr>

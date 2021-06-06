@@ -1,9 +1,9 @@
 import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import { Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import AddTutorial from "./components/AddTutorial";
-// import Cliente from "./components/Cliente";
-// import AlterCliente from "./components/AlterCliente";
 import Tutorial from "./components/Tutorial";
 import TutorialsList from "./components/TutorialsList";
 
