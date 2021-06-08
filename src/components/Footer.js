@@ -1,5 +1,5 @@
 import React from 'react'
-
+// rodape da pagina
 const Footer = () => {
   return (
     <div>
@@ -8,6 +8,7 @@ const Footer = () => {
           <div className="container">
             <div className="row">
               <div className="col-lg-3 col-md-6 footer-contact">
+                {/* Localizaão e o email */}
                 <h3>Masso<span className="text-danger">terapia</span></h3>
                 <p>
                   108 Barra
@@ -18,6 +19,7 @@ const Footer = () => {
               </div>
 
               <div className="col-lg-2 col-md-6 footer-links">
+                {/* Links para as seções */}
                 <h4>Todos os links</h4>
                 <ul className="list-ul-Footer">
                   <li className="list-li-Footer "><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none" href="/">Home</a></li>
@@ -29,6 +31,7 @@ const Footer = () => {
               </div>
 
               <div class="col-lg-3 col-md-6 footer-links ">
+                {/* Desenvolvedores do projeto */}
                 <h4>Desenvolvedores</h4>
                 <ul className="list-ul-Footer">
                   <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">João Victor</a></li>

@@ -13,7 +13,6 @@
   color: #e74b4b;
 }
 .color{
-  
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100vh;
@@ -94,16 +93,40 @@ header li{
   height: 450px;
   object-fit: cover;
 }
+.form{
+  width: 70%;
+  margin:0 auto;
+}
+li {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+.buttonform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 50%;
+}
+.btn-update{
+  margin-left: 15%;
+}
+.btn-publicar{
+  margin-left: 20%;
+}
+.btn-deletar{
+  margin-left: 2%;
+}
 footer{
   height: 100px;
 }
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -125,4 +148,4 @@ footer{
   to {
     transform: rotate(360deg);
   }
-}
+} */
