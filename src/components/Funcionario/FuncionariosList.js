@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import FuncionarioDataServiceService from "../services/FuncionarioDataService";
-import Header from './Header'
+import FuncionarioDataServiceService from "../../services/FuncionarioDataService";
+import Header from '../../components/Header';
 
-const FuncionariosList = () => {
-  
+const FuncionariosList = (props) => {
   const [searchTitle, setSearchTitle] = useState("");
   const [Funcionarios, setFuncionarios] = useState(FuncionarioDataServiceService.getAll());
 
@@ -28,6 +27,7 @@ const FuncionariosList = () => {
   //filtra o nome do funcionario
   const findByTitle = () => {
     setFuncionarios(FuncionarioDataServiceService.getById(searchTitle))
+    
   };
 
   return (
@@ -40,23 +40,25 @@ const FuncionariosList = () => {
           <li className="nav-item active ml-5">
             <Link to={'/funcionario'} className="nav-link text-dark">Funcionario</Link>
           </li>
-
-          <li className="nav-item ">
-            <Link to={"/add"} className="nav-link text-dark ">
+          <li className="nav-item active ml-5">
+            <Link to={"/add"} className="nav-link text-dark  ">
               Adicionar
             </Link>
           </li>
-
+          <li className="nav-item active ml-5">
+            <Link to={"/produto"} className="nav-link text-dark">
+              Produto
+            </Link>
+          </li> 
           <div>
             <li className="nav-item nav-link text-dark h6 mb-0"> 
-                Bem vindo Administrador
-            </li>
-            
+              Bem vindo Administrador
+            </li>           
           </div>
         </div>
       </Header>
       <div className="list text-center">
-        <div className="col-md-10">
+        <div className="col-md-10 form">
           
           <div className="input-group mb-3">
             <input
@@ -79,7 +81,7 @@ const FuncionariosList = () => {
         </div>
         <div className="col-md-10 mx-auto">
           <h4>Lista de Funcionario</h4>
-
+        
           <table className="table">
             <thead className="thead-dark">
               <tr>
@@ -94,31 +96,34 @@ const FuncionariosList = () => {
               
               </tr>
             </thead>
-            <tbody>
-            { 
-              Funcionarios &&
-              Funcionarios.map((Funcionario, index) => (
-                <tr>
-                  <th scope="row">{Funcionario.key}</th>
-                  <td>{Funcionario.nomeAtendente}</td>
-                  <td>{Funcionario.telefone}</td>
-                  <td>{Funcionario.codigo}</td>
-                  <td>{Funcionario.email}</td>
-                  <td>{Funcionario.enderecoCompleto}</td>
-                  <td>{Funcionario.dataNascimento}</td>
-                  <td>{Funcionario.cartTrabalho}</td>
 
-                  <td> <Link to={"/funcionarios/" + Funcionario.nomeAtendente}
-                    className="btn btn-warning">Editar</Link>
-                  </td>
-                  <td onClick={() => findByTitle()}><Link to="/funcionario"onClick={() => deleteFuncionario(Funcionario)}
-                    className="btn btn-danger">Deletar</Link>
-                  </td>
-                </tr>
-              ))}
-              </tbody>
+              <tbody>
+              { 
+                Funcionarios &&
+                Funcionarios.map((Funcionario, index) => (
+                  <tr>
+                    <th scope="row">{Funcionario.key}</th>
+                      <td>{Funcionario.nomeAtendente}</td>
+                      <td>{Funcionario.telefone}</td>
+                      <td>{Funcionario.codigo}</td>
+                      <td>{Funcionario.email}</td>
+                      <td>{Funcionario.enderecoCompleto}</td>
+                      <td>{Funcionario.dataNascimento}</td>
+                      <td>{Funcionario.cartTrabalho}</td>
+                    
+
+                    <td> <Link to={"/funcionarios/" + Funcionario.nomeAtendente}
+                      className="btn btn-warning">Editar</Link>
+                    </td>
+                    <td onClick={() => findByTitle()}><Link to="/funcionario"onClick={() => deleteFuncionario(Funcionario)}
+                      className="btn btn-danger">Deletar</Link>
+                    </td>
+                    
+                  </tr>
+                ))}
+              </tbody>     
             </table>
-            
+                         
           <button
             className="m-3 btn btn-sm btn-danger"
             onClick={removeAllFuncionarios}>

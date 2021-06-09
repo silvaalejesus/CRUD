@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import ProdutoDataService from "../services/ProdutoDataService";
+import ProdutoDataService from "../../services/ProdutoDataService";
 import { Link } from "react-router-dom";
+import Header from '../../components/Header';
 
 const Produto = props => {
   const initialProdutoState = {
@@ -21,7 +22,7 @@ const Produto = props => {
     setCurrentProduto(data[0])     
   }, [])
 
-  const   handleInputChange = event => {
+  const handleInputChange = event => {
     const { name, value } = event.target;
     setCurrentProduto({ ...currentProduto, [name]: value });
   };
@@ -55,13 +56,38 @@ const Produto = props => {
   const deleteProduto = () => {
     console.log(currentProduto)
     if (window.confirm('Deseja excluir?')) {
-      ProdutoDataService.remove(currentProduto.key);
+      ProdutoDataService.remove(currentProduto);
     }
   };
 
   return (
     <div>
-      {currentProduto ? (
+      <Header>
+        <li className="nav-item active mr-5">
+          <Link to={'/'} className="nav-link text-dark h3">Masso<span className="text-danger">terapia</span></Link>
+        </li>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item active ml-5">
+            <Link to={'/funcionario'} className="nav-link text-dark">Funcionario</Link>
+          </li>
+
+          <li className="nav-item">
+            <Link to={"/add"} className="nav-link text-dark">
+              Adicionar
+            </Link>
+          </li>
+          <li className="nav-item active mr-5">
+            <Link to={"/Produto"} className="nav-link text-dark">
+              Produto
+            </Link>
+            
+          </li>
+          <li className="nav-item nav-link text-dark h6 mb-0">
+            Bem vindo Administrador
+          </li>
+        </div>
+      </Header>
+       {currentProduto ? ( 
         <div className="edit-form">
           <h4>Produto</h4>
             <form>
@@ -145,12 +171,12 @@ const Produto = props => {
           </Link>
           <p>{message}</p>
         </div>
-      ) : (
+       ) : (
         <div>
           <br />
           <p>Por favor, clique em um Tutorial ...</p>
         </div>
-      )}
+       )}  
     </div>
   );
 };

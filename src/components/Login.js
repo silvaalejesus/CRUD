@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import { Link } from 'react-router-dom';
 import massagemSobre from '../assets/massagemSobre.jpg'
 import shiatsu from '../assets/shiatsu.jpg'
 import massagemRelaxante from '../assets/massagemRelaxante.jpg'
 import reflexologiaPodal from '../assets/reflexologiaPodal.jpg'
+import Header from './Header';
+import Footer from './Footer';
+
+import { Link } from 'react-router-dom';
+
 
 // função para a validação dos dados
 function useFormik({
@@ -55,7 +57,7 @@ function useFormik({
   };
 }
 
-function Login() {
+const Login = (props) => {
   const [acessar, setAcessar] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -105,6 +107,7 @@ function Login() {
         <li className="nav-item active mr-5">
           <a href='#servicos' className="nav-link text-dark h6">Serviços</a>
         </li>
+        
         <div className="collapse navbar-collapse justify-content-end">
           <button className="btn btn-danger modalEntrar" onClick={() => setModalOpen(true)}>
             Login
@@ -239,6 +242,12 @@ function Login() {
         </div>                    
       </section>
       {/* final da seção de serviços */}
+      {/* começo da seção de feedback */}
+      <section> 
+        
+      </section>
+      
+      {/* final da seção de feedback */}
       {/* Rodape */}
       <Footer />
     </div>

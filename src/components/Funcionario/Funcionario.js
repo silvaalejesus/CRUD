@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import FuncionarioDataServiceService from "../services/FuncionarioDataService";
+import FuncionarioDataServiceService from "../../services/FuncionarioDataService";
 import { Link } from "react-router-dom";
-import Header from './Header';
+import Header from '../../components/Header';
 
 const Funcionario = props => {
   // valores iniciais
@@ -94,6 +94,12 @@ const Funcionario = props => {
             <Link to={"/add"} className="nav-link text-dark">
               Adicionar
             </Link>
+          </li>
+          <li className="nav-item active mr-5">
+            <Link to={"/Produto"} className="nav-link text-dark">
+              Produto
+            </Link>
+            
           </li>
           <li className="nav-item nav-link text-dark h6 mb-0">
             Bem vindo Administrador
@@ -203,7 +209,7 @@ const Funcionario = props => {
               {currentFuncionario.published ? "Published" : "Pending"}
             </div>
           </form>
-          <div className="btn-publicar">
+          <div className="text-center">
             <div>
               {currentFuncionario.published ? (
                 <button
@@ -225,18 +231,18 @@ const Funcionario = props => {
                   Deletar
               </button>
               </Link>
-
+              
+            <Link className="" to="/funcionario">
+              <button
+                type="submit"
+                className=" btn btn-warning"
+                onClick={updateFuncionario}
+              >
+                Update
+              </button>
+            </Link>
             </div>
           </div>
-          <Link to="/funcionario">
-            <button
-              type="submit"
-              className=" btn btn-warning"
-              onClick={updateFuncionario}
-            >
-              Update
-            </button>
-          </Link>
           <p>{message}</p>
         </div>
       ) : (

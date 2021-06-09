@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import FuncionarioDataServiceService from "../services/FuncionarioDataService";
-import Header from './Header'
+import FuncionarioDataServiceService from "../../services/FuncionarioDataService";
+import Header from '../../components/Header';
 import {Link} from 'react-router-dom'
 
 const AddFuncionario = () => {
@@ -67,6 +67,12 @@ const AddFuncionario = () => {
                Adicionar
              </Link>
           </li>
+          <li className="nav-item active mr-5">
+            <Link to={"/Produto"} className="nav-link text-dark">
+              Produto
+            </Link>
+           
+          </li>
           <div className=" collapse navbar-collapse justify-content-end">
              <li className="nav-item nav-link text-dark h6 mb-0"> 
                 Bem vindo Administrador
@@ -77,7 +83,7 @@ const AddFuncionario = () => {
       {submitted ? (
         <div>
 {/*           <h4>You submitted successfully!</h4>
- */}          <h4>Funcionario cadastrado com sucesso!</h4>
+ */}      <h4 >Funcionario cadastrado com sucesso!</h4>
           <button className="btn btn-success" onClick={newfuncionario}>
             Adicionar
           </button>
@@ -181,7 +187,7 @@ const AddFuncionario = () => {
             />
           </div>
             
-          <button onClick={savefuncionario} className="btn btn-success text-center buttonform">
+          <button onClick={savefuncionario} className="mt-5 btn btn-success text-center buttonform">
             Submit
           </button>
         </div>

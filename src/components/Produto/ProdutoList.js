@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ProdutoDataService from "../services/ProdutoDataService";
+import ProdutoDataService from "../../services/ProdutoDataService";
+import Header from '../../components/Header';
 
 const ProdutoList = () => {
-
-  const [searchTitle, setSearchTitle] = useState("");
+  const [searchtitle, setSearchtitle] = useState("");
   const [Produto, setProduto] = useState(ProdutoDataService.getAll());
 
-  const onChangeSearchTitle = e => {
-    const searchTitle = e.target.value;
-    setSearchTitle(searchTitle);
+  const onChangeSearchtitle = e => {
+    const searchtitle = e.target.value;
+    setSearchtitle(searchtitle);
   };
-
 
   const deleteProduto = (id) => {
     if (window.confirm('Deseja excluir?')) {
@@ -26,36 +25,65 @@ const ProdutoList = () => {
     }
   };
 
-  const findByTitle = () => {
-    setProduto(ProdutoDataService.getById(searchTitle))
+  const findBytitle = () => {
+    setProduto(ProdutoDataService.getById(searchtitle))
   };
 
   return (
-    <div className="list row">
-      <div className="col-md-10">
-        <div className="input-group mb-3">
+    <div className="list text-center">
+      <Header>
+        <li className="nav-item active mr-5">
+          <Link to={'/'} className="nav-link text-dark h3">Masso<span className="text-danger">terapia</span></Link>
+        </li>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item active ml-5">
+            <Link to={'/funcionario'} className="nav-link text-dark">Funcionario</Link>
+          </li>
+
+
+          <li className="nav-item active">
+            <Link to={"/produto"} className="nav-link text-dark">
+              Produto
+            </Link>
+          </li>
+          <li className="nav-item active">
+            <Link to={"/addproduto"} className="nav-link text-dark">
+              Adicionar Produto
+            </Link>
+          </li>
+          
+          <div>
+            <li className="nav-item nav-link text-dark h6 mb-0"> 
+                Bem vindo Administrador
+            </li>
+            
+          </div>
+        </div>
+      </Header>
+      <div className="">
+        <div className="input-group mb-3 form">
           <input
             type="text"
             className="form-control"
             placeholder="Search by title"
-            value={searchTitle}
-            onChange={onChangeSearchTitle}
+            value={searchtitle}
+            onChange={onChangeSearchtitle}
           />
           <div className="input-group-append">
             <button
               className="btn btn-outline-secondary"
               type="button"
-              onClick={findByTitle}
+              onClick={findBytitle}
             >
               Pesquisar
             </button>
           </div>
         </div>
       </div>
-      <div className="col-md-10">
+      <div className="mr-auto">
         <h4>Produtos</h4>
-        <table class="table">
-          <thead class="thead-dark">
+        <table className="table">
+          <thead className="thead-dark">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Titulo</th>
@@ -75,10 +103,10 @@ const ProdutoList = () => {
                   <td>{Produto.preco}</td>
                   <td>{Produto.quant}</td>
                   <td> <Link to={"/Produto/" + Produto.title}
-                    className="badge-warning">Editar</Link>
+                    className="mr-0 btn btn-warning">Editar</Link>
                   </td>
                   <td> <Link onClick={() => deleteProduto(Produto.title)}
-                    className="badge-danger">Remover</Link>
+                    className="mb-0 btn btn-danger">Remover</Link>
                   </td>
 
                 </tr>
