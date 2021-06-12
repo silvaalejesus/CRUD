@@ -3,28 +3,23 @@ import massagemSobre from '../assets/massagemSobre.jpg'
 import shiatsu from '../assets/shiatsu.jpg'
 import massagemRelaxante from '../assets/massagemRelaxante.jpg'
 import reflexologiaPodal from '../assets/reflexologiaPodal.jpg'
-import Header from './Header';
 import Footer from './Footer';
-
 import { Link } from 'react-router-dom';
-
 
 // função para a validação dos dados
 function useFormik({
   initialValues,
   validate
 }) {
-  //funcão para pegar os valores
   const [touched, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
-
-
+  
   useEffect(() => {
     validateValues(values);
   }, [values]);
-
   
+  //funcão para pegar os valores
   function handleChange(event) {
     const fieldName = event.target.getAttribute('name');
     const { value } = event.target;
@@ -33,7 +28,6 @@ function useFormik({
       [fieldName]: value,
     });
   }
-
   function handleBlur(event) {
     const fieldName = event.target.getAttribute('name');
     console.log(fieldName);
@@ -42,11 +36,10 @@ function useFormik({
       [fieldName]: true,
     })
   }
-
+  // seta os erros
   function validateValues(values) {
     setErrors(validate(values));
   }
-
   return {
     values,
     errors,
@@ -57,7 +50,7 @@ function useFormik({
   };
 }
 
-const Login = (props) => {
+const Home = (props) => {
   const [acessar, setAcessar] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -68,23 +61,21 @@ const Login = (props) => {
     },
     validate: function (values) {
       const errors = {};
-
       if (!values.userEmail.includes('@')) {
         errors.userEmail = 'Insira um email valido';
       }
-
-      if (values.userPassword != "123456" && values.userEmail != 'admin@admin.com') {
+      if (values.userPassword !== "123456" && values.userEmail !== 'admin@admin.com') {
         errors.userPassword = 'Insira uma senha valida'
         setAcessar(false)
       }
-      if (values.userPassword == "123456" && values.userEmail == 'admin@admin.com') {
+      if (values.userPassword === "123456" && values.userEmail === 'admin@admin.com') {
         setAcessar(true)
       }
       return errors;
     }
   });
   useEffect(() => {
-    if (formik.values.userPassword == "123456" && formik.values.userEmail == 'admin@admin.com') {
+    if (formik.values.userPassword === "123456" && formik.values.userEmail === 'admin@admin.com') {
       setAcessar(true)
     } else {
       setAcessar(false)
@@ -94,7 +85,7 @@ const Login = (props) => {
   return (
     <div>
       {/* Menu principal */}
-      <Header>
+      <header className="navbar navbar-expand navbar-dark bg-white">
         <li className="nav-item active mr-5">
           <Link to={'/'} className="nav-link text-dark font-weight-bold h3">Masso<span className="text-menu">terapia</span></Link>
         </li>
@@ -107,7 +98,6 @@ const Login = (props) => {
         <li className="nav-item active mr-5">
           <a href='#servicos' className="nav-link text-dark h6">Serviços</a>
         </li>
-        
         <div className="collapse navbar-collapse justify-content-end">
           <button className="btn btn-danger modalEntrar" onClick={() => setModalOpen(true)}>
             Login
@@ -127,8 +117,6 @@ const Login = (props) => {
                     <form onSubmit={(event) => {
                       event.preventDefault();
                       console.log(formik.values);
-
-                      // validateValues(formik.values)
                     }}>
                       <div className="formField">
                         <label htmlFor="userEmail">
@@ -146,7 +134,6 @@ const Login = (props) => {
                         />
                         {formik.touched.userEmail && formik.errors.userEmail && <span className="formField__error">{formik.errors.userEmail}</span>}
                       </div>
-
                       <div className="formField">
                         <label htmlFor="userPassword">
                           Senha:
@@ -163,7 +150,6 @@ const Login = (props) => {
                         />
                         {formik.touched.userPassword && formik.errors.userPassword && <span className="formField__error">{formik.errors.userPassword}</span>}
                       </div>
-
                       {acessar ? (
                         <Link to="/funcionario">
                           <button className="btn btn-danger" type="submit">
@@ -173,17 +159,16 @@ const Login = (props) => {
                         <button className="btn btn-danger" disabled type="submit">
                           Entrar
                         </button>
-                      )
-                      }
+                      )}
                     </form>
                   </div>
                 </div>
               </div>
             </div>
-          //Final do modal
+            //Final do modal
           )}
         </div>
-      </Header>
+      </header>
       {/* Final do menu principal */}
       {/* começo da seção de apresentação */}
       <section className="bg-img">
@@ -196,7 +181,6 @@ const Login = (props) => {
         </div>
       </section>
       {/* final da seção de apresentação */}
-
       {/* começo da seção de sobre */}
       <section id="sobre" className="mt-5">
         <div className="tab-pane" id="tab-2">
@@ -208,7 +192,7 @@ const Login = (props) => {
               <p className="fst-italic">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
                 magna aliqua.
-                </p>
+              </p>
               <ul className="list-ul">
                 <li><i className="list-li ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
                 <li><i className="list-li ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
@@ -229,24 +213,24 @@ const Login = (props) => {
         <div className="row mx-md-n5">
           <div className="col px-md-5">
             <p>Shiatsu</p>
-            <img className="img-servicos" src={shiatsu} alt="shiatsu"/>
+            <img className="img-servicos" src={shiatsu} alt="shiatsu" />
           </div>
           <div className="col px-md-5">
             <p>Massagem Relaxante</p>
-            <img className="img-servicos" src={massagemRelaxante} alt="massagem Relaxante"/>
+            <img className="img-servicos" src={massagemRelaxante} alt="massagem Relaxante" />
           </div>
           <div className="col px-md-5">
             <p>Reflexologia Podal</p>
-            <img className="img-servicos" src={reflexologiaPodal} alt="reflexologia Podal"/>
+            <img className="img-servicos" src={reflexologiaPodal} alt="reflexologia Podal" />
           </div>
-        </div>                    
+        </div>
       </section>
       {/* final da seção de serviços */}
       {/* começo da seção de feedback */}
-      <section> 
-        
+      <section>
+
       </section>
-      
+
       {/* final da seção de feedback */}
       {/* Rodape */}
       <Footer />
@@ -255,7 +239,7 @@ const Login = (props) => {
   );
 }
 
-export default Login;
+export default Home;
 
 
 

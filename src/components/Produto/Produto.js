@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ProdutoDataService from "../../services/ProdutoDataService";
+import ProdutoDataService from "../../services/Produto/ProdutoDataServiceRest";
 import { Link } from "react-router-dom";
 import Header from '../../components/Header';
 
@@ -9,18 +9,32 @@ const Produto = props => {
     title: "",
     description: "",
     preco: "",
-    quant:"",
+    quant: "",
     published: "Unpublished",
   };
   const [message, setMessage] = useState("");
   const [currentProduto, setCurrentProduto] = useState(initialProdutoState);
-  const [key, setKey] = useState(props.match.params.id)
 
-  useEffect(()=>{
-    const data = ProdutoDataService.getById(key)
-    console.log(key)
-    setCurrentProduto(data[0])     
-  }, [])
+  const getTutorial = id => {
+    ProdutoDataService.get(id)
+      .then(response => {
+        setCurrentProduto(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    getTutorial(props.match.params.id);
+  }, [props.match.params.id]);
+
+  // useEffect(()=>{
+  //   const data = ProdutoDataService.getById(key)
+  //   console.log(key)
+  //   setCurrentProduto(data[0])     
+  // }, [])
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -29,154 +43,144 @@ const Produto = props => {
 
   const updatePublished = status => {
     const data = {
+      id: currentProduto.id,
       title: currentProduto.title,
       description: currentProduto.description,
       preco: currentProduto.preco,
       quant: currentProduto.quant,
       published: status
     };
-    ProdutoDataService.update(key, data);  
-    setCurrentProduto(data)
+    ProdutoDataService.update(currentProduto.id, data)
+      .then(response => {
+        setCurrentProduto({ ...currentProduto, published: status });
+        console.log(response);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   const updateProduto = () => {
     //console.log(currentProduto)
-    const data = {
-      title: currentProduto.title,
-      description: currentProduto.description,
-      preco: currentProduto.preco,
-      published: currentProduto.published,
-      quant: currentProduto.quant
-      
-    };  
-    ProdutoDataService.update(key, data);
-    setCurrentProduto(data)
+    ProdutoDataService.update(currentProduto.id, currentProduto)
+      .then(response => {
+        console.log(response);
+        setMessage("The tutorial was updated successfully!");
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
   };
 
   const deleteProduto = () => {
-    console.log(currentProduto)
     if (window.confirm('Deseja excluir?')) {
-      ProdutoDataService.remove(currentProduto);
+      ProdutoDataService.remove(currentProduto.id)
+        .then(response => {
+          console.log(response.data);
+          props.history.push("/Produto");
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
   };
 
   return (
     <div>
-      <Header>
-        <li className="nav-item active mr-5">
-          <Link to={'/'} className="nav-link text-dark h3">Masso<span className="text-danger">terapia</span></Link>
-        </li>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item active ml-5">
-            <Link to={'/funcionario'} className="nav-link text-dark">Funcionario</Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to={"/add"} className="nav-link text-dark">
-              Adicionar
+      <Header />
+      {currentProduto ? (
+        <div className="edit-form form">
+          <h4 className="text-center">Produto</h4>
+          <form>
+            <div className="form-group">
+              <label htmlFor="title">Titulo</label>
+              <input
+                type="text"
+                className="form-control"
+                id="title"
+                name="title"
+                value={currentProduto.title}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Descrição</label>
+              <input
+                type="text"
+                className="form-control"
+                id="description"
+                name="description"
+                value={currentProduto.description}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="preco">Preço</label>
+              <input
+                type="text"
+                className="form-control"
+                id="preco"
+                name="preco"
+                value={currentProduto.preco}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="quant">Quantidade</label>
+              <input
+                type="text"
+                className="form-control"
+                id="quant"
+                name="quant"
+                value={currentProduto.quant}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>
+                <strong>Status:</strong>
+              </label>
+              {currentProduto.published ? "Published" : "Pending"}
+            </div>
+          </form>
+          <div className="text-center">
+            {currentProduto.published ? (
+              <button
+                className="btn btn-success mr-2 text-center"
+                onClick={() => updatePublished(false)}
+              >
+                Cancelar
+              </button>
+            ) : (
+              <button
+                className="btn btn-success mr-2 text-center"
+                onClick={() => updatePublished(true)}
+              >
+                Publicar
+              </button>
+            )}
+            <button className="btn btn-danger mr-2 text-center" onClick={deleteProduto}>
+              Deletar
+            </button>
+            <Link to="/Produto">
+              <button
+                type="submit"
+                className="btn btn-warning text-center"
+                onClick={updateProduto}
+              >
+                Atualizar
+              </button>
             </Link>
-          </li>
-          <li className="nav-item active mr-5">
-            <Link to={"/Produto"} className="nav-link text-dark">
-              Produto
-            </Link>
-            
-          </li>
-          <li className="nav-item nav-link text-dark h6 mb-0">
-            Bem vindo Administrador
-          </li>
-        </div>
-      </Header>
-       {currentProduto ? ( 
-        <div className="edit-form">
-          <h4>Produto</h4>
-            <form>
-              <div className="form-group">
-                <label htmlFor="title">Titulo</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  name="title"
-                  value={currentProduto.title}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="description">Descrição</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="description"
-                  name="description"
-                  value={currentProduto.description}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="preco">Preço</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="preco"
-                  name="preco"
-                  value={currentProduto.preco}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="quant">Quantidade</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="quant"
-                  name="quant"
-                  value={currentProduto.quant}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>
-                  <strong>Status:</strong>
-                </label>
-                {currentProduto.published ? "Published" : "Pending"}
-              </div>
-            </form>
-          {currentProduto.published ? (
-            <button
-              className="badge-primary mr-2"
-              onClick={() => updatePublished(false)}
-            >
-              Cancelar Publicação
-            </button>
-          ) : (
-            <button
-              className=" badge-primary mr-2"
-              onClick={() => updatePublished(true)}
-            >
-              Publicar
-            </button>
-          )}
-          <button className="badge-danger mr-2" onClick={deleteProduto}>
-            Apagar
-          </button>
-          <Link to="/">
-            <button
-              type="submit"
-              className="badge-success"
-              onClick={updateProduto}
-            >
-             Atualizar
-            </button>
-          </Link>
+          </div>
           <p>{message}</p>
         </div>
-       ) : (
+      ) : (
         <div>
           <br />
           <p>Por favor, clique em um Tutorial ...</p>
         </div>
-       )}  
+      )}
     </div>
   );
 };

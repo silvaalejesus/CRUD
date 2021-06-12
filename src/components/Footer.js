@@ -17,7 +17,6 @@ const Footer = () => {
                   <strong>Email:</strong><p>massoterapia@example.com</p>
                 </p>
               </div>
-
               <div className="col-lg-2 col-md-6 footer-links">
                 {/* Links para as seções */}
                 <h4>Todos os links</h4>
@@ -29,16 +28,15 @@ const Footer = () => {
                   <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="/">Politica de privacidade</a></li>
                 </ul>
               </div>
-
               <div class="col-lg-3 col-md-6 footer-links ">
                 {/* Desenvolvedores do projeto */}
                 <h4>Desenvolvedores</h4>
                 <ul className="list-ul-Footer">
-                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">João Victor</a></li>
-                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">Tiago Gomes</a></li>
-                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">Alessandra</a></li>
-                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">Edson</a></li>
-                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none"href="#">Alcimar</a></li>  
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none" target="_blank" href="https://github.com/alcimarw?tab=repositories">Alcimar</a></li>  
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none" target="_blank" href="https://github.com/silvaalejesus">Alessandra</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none" target="_blank" href="https://github.com/EdsonMSF-DEV?tab=repositories">Edson</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none" target="_blank" href="https://github.com/joaovictorbrito">João Victor</a></li>
+                  <li className="list-li-Footer"><i class="bx bx-chevron-right"></i> <a className="text-secondary text-decoration-none" target="_blank" href="https://github.com/TiagoGomesDev?tab=repositories">Tiago Gomes</a></li>
                 </ul>
               </div>
             </div>

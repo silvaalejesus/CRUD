@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FuncionarioDataServiceService from "../../services/FuncionarioDataService";
+import FuncionarioDataService from "../../services/Funcionario/FuncionarioDataServiceRest";
 import { Link } from "react-router-dom";
 import Header from '../../components/Header';
 
@@ -22,15 +22,30 @@ const Funcionario = props => {
     published: "Unpublished",
   };
   const [message, setMessage] = useState("");
-
   const [currentFuncionario, setCurrentFuncionario] = useState(initialFuncionarioState);
-  const [key, setKey] = useState(props.match.params.id)
+  // const [key, setKey] = useState(props.match.params.id)
 
+  const getTutorial = id => {
+    FuncionarioDataService.get(id)
+      .then(response => {
+        setCurrentFuncionario(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
   useEffect(() => {
-    const data = FuncionarioDataServiceService.getById(key)
-    console.log(key)
-    setCurrentFuncionario(data[0])
-  }, [])
+    getTutorial(props.match.params.id);
+    return () => {
+      setMessage({})
+    }
+  }, [props.match.params.id]);
+  // useEffect(() => {
+  //   const data = FuncionarioDataService.getById(key)
+  //   console.log(key)
+  //   setCurrentFuncionario(data[0])
+  // }, [])
   // pega os valores digitados
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -40,6 +55,7 @@ const Funcionario = props => {
   //atualiza a opção do published
   const updatePublished = status => {
     const data = {
+      id: currentFuncionario.id,
       nomeAtendente: currentFuncionario.nomeAtendente,
       telefone: currentFuncionario.telefone,
       codigo: currentFuncionario.codigo,
@@ -49,63 +65,46 @@ const Funcionario = props => {
       cartTrabalho: currentFuncionario.cartTrabalho,
       published: status
     };
-    FuncionarioDataServiceService.update(key, data);
-    setCurrentFuncionario(data)
+    FuncionarioDataService.update(currentFuncionario.id, data)
+      .then(response => {
+        setCurrentFuncionario({ ...currentFuncionario, published: status });
+        console.log(response);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
   };
 
   const updateFuncionario = () => {
     // valores para o update
-    const data = {
-      nomeAtendente: currentFuncionario.nomeAtendente,
-      telefone: currentFuncionario.telefone,
-      codigo: currentFuncionario.codigo,
-      nomeCliente: currentFuncionario.nomeCliente,
-      email: currentFuncionario.email,
-      enderecoCompleto: currentFuncionario.enderecoCompleto,
-      dataNascimento: currentFuncionario.dataNascimento,
-      estadoCivil: currentFuncionario.estadoCivil,
-      cartTrabalho: currentFuncionario.cartTrabalho
 
-
-    };
-    FuncionarioDataServiceService.update(key, data);
-    setCurrentFuncionario(data)
+    FuncionarioDataService.update(currentFuncionario.id, currentFuncionario)
+      .then(response => {
+        console.log(response);
+        setMessage("The tutorial was updated successfully!");
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
   //deletar o funcionario
   const deleteFuncionario = () => {
-    console.log(currentFuncionario)
     if (window.confirm('Deseja excluir?')) {
-      FuncionarioDataServiceService.remove(currentFuncionario.key);
+      FuncionarioDataService.remove(currentFuncionario.id)
+        .then(response => {
+          console.log(response.data);
+          props.history.push("/funcionario");
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
   };
 
   return (
     <div>
-      <Header>
-        <li className="nav-item active mr-5">
-          <Link to={'/'} className="nav-link text-dark h3">Masso<span className="text-danger">terapia</span></Link>
-        </li>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item active ml-5">
-            <Link to={'/funcionario'} className="nav-link text-dark">Funcionario</Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to={"/add"} className="nav-link text-dark">
-              Adicionar
-            </Link>
-          </li>
-          <li className="nav-item active mr-5">
-            <Link to={"/Produto"} className="nav-link text-dark">
-              Produto
-            </Link>
-            
-          </li>
-          <li className="nav-item nav-link text-dark h6 mb-0">
-            Bem vindo Administrador
-          </li>
-        </div>
-      </Header>
+      <Header />   
       {currentFuncionario ? (
 
         <div id="contents">
@@ -149,7 +148,6 @@ const Funcionario = props => {
               />
             </div>
 
-
             <div className="form-group">
               <label htmlFor="email">E-mail</label>
               <input
@@ -173,7 +171,6 @@ const Funcionario = props => {
                 name="enderecoCompleto"
                 placeholder=""
               />
-
             </div>
             <div className="form-group">
               <label htmlFor="title">Data de Nascimento:</label>
@@ -185,9 +182,7 @@ const Funcionario = props => {
                 value={currentFuncionario.dataNascimento}
                 onChange={handleInputChange}
                 name="dataNascimento"
-
               />
-
             </div>
             <div className="form-group">
               <label htmlFor="cartTrabalho">Cart Trabalho:</label>
@@ -229,18 +224,18 @@ const Funcionario = props => {
               <Link to="/funcionario">
                 <button className="btn btn-danger " onClick={deleteFuncionario}>
                   Deletar
-              </button>
+                </button>
               </Link>
-              
-            <Link className="" to="/funcionario">
-              <button
-                type="submit"
-                className=" btn btn-warning"
-                onClick={updateFuncionario}
-              >
-                Update
-              </button>
-            </Link>
+
+              <Link className="" to="/funcionario">
+                <button
+                  type="submit"
+                  className=" btn btn-warning"
+                  onClick={updateFuncionario}
+                >
+                  Update
+                </button>
+              </Link>
             </div>
           </div>
           <p>{message}</p>

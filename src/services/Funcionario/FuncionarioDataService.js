@@ -1,6 +1,6 @@
 let FUNCIONARIOS = [
-  {nomeAtendente: 'Ana', telefone: '(71)9863-6784', codigo: '752568', email: 'teste@teste.com',enderecoCompleto: 'Barra', dataNascimento: '2000-29-02', cartTrabalho: '451235'},
-  {nomeAtendente: 'Brito', telefone: '(71)9262-6784', codigo: '253568',email: 'exemplo@exemplo.com', enderecoCompleto: 'Pituba', dataNascimento: '1999-29-02', cartTrabalho: '381235'},
+  {nomeAtendente: 'Ana', telefone: '(71)9863-6784', codigo: '752568', email: 'teste@teste.com',enderecoCompleto: 'Barra', dataNascimento: '2000-29-02', cartTrabalho: '451235', published: 'Published'},
+  {nomeAtendente: 'Brito', telefone: '(71)9262-6784', codigo: '253568',email: 'exemplo@exemplo.com', enderecoCompleto: 'Pituba', dataNascimento: '1999-29-02', cartTrabalho: '381235', published: 'Published'},
 ]
 const getAll = () => {
   return FUNCIONARIOS;

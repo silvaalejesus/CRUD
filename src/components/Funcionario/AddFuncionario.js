@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import FuncionarioDataServiceService from "../../services/FuncionarioDataService";
+import FuncionarioDataServiceService from "../../services/Funcionario/FuncionarioDataServiceRest";
 import Header from '../../components/Header';
-import {Link} from 'react-router-dom'
+
 
 const AddFuncionario = () => {
   const initialfuncionarioState = {
     id: null,
-    /* Nome: "", */
     nomefuncionario: "",
     telefone: '',
     nomeAtendente: "",
@@ -17,11 +16,6 @@ const AddFuncionario = () => {
     email: '',
     dataNascimento: '',
     cartTrabalho: "",
-    
-
-    /* title: "",
-    description: "",
-    published: false */
   };
   const [funcionario, setFuncionario] = useState(initialfuncionarioState);
   const [submitted, setSubmitted] = useState(false);
@@ -40,11 +34,28 @@ const AddFuncionario = () => {
       enderecoCompleto: funcionario.enderecoCompleto,
       dataNascimento: funcionario.dataNascimento,
       cartTrabalho: funcionario.cartTrabalho,
-
+      published: false
     };
 
-    FuncionarioDataServiceService.create(data);
-    setSubmitted(true);
+    FuncionarioDataServiceService.create(data)
+      .then(response => {
+        setFuncionario({
+          id: response.data.id,
+          nomeAtendente: response.data.nomeAtendente,
+          telefone: response.data.telefone,
+          codigo: response.data.codigo,
+          email: response.data.email,
+          enderecoCompleto: response.data.enderecoCompleto,
+          dataNascimento: response.data.dataNascimento,
+          cartTrabalho: response.data.cartTrabalho,
+          published: response.data.published
+        });
+        setSubmitted(true);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   const newfuncionario = () => {
@@ -54,48 +65,18 @@ const AddFuncionario = () => {
 
   return (
     <div className="submit-form">
-      <Header>
-        <li className="nav-item active mr-5">
-          <Link to={'/'} className="nav-link text-dark h3">Masso<span className="text-danger">terapia</span></Link>
-        </li>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item active ml-5">
-            <Link to={'/funcionario'} className="nav-link text-dark">Funcionario</Link>           
-          </li>
-          <li className="nav-item">
-            <Link to={"/add"} className="nav-link text-dark">
-               Adicionar
-             </Link>
-          </li>
-          <li className="nav-item active mr-5">
-            <Link to={"/Produto"} className="nav-link text-dark">
-              Produto
-            </Link>
-           
-          </li>
-          <div className=" collapse navbar-collapse justify-content-end">
-             <li className="nav-item nav-link text-dark h6 mb-0"> 
-                Bem vindo Administrador
-             </li>
-          </div>
-        </div>
-      </Header>
+      <Header />
       {submitted ? (
-        <div>
-{/*           <h4>You submitted successfully!</h4>
- */}      <h4 >Funcionario cadastrado com sucesso!</h4>
+        <div className="mx-auto text-center">
+          <h4>Funcionario cadastrado com sucesso!</h4>
           <button className="btn btn-success" onClick={newfuncionario}>
             Adicionar
           </button>
         </div>
       ) : (
-      
         <div id="contents">
           <div className="col-sm text-center">
             <h1><dt>Ficha de Funcionario</dt></h1>
-          </div>
-          <div className="text-center" >
-            <strong >Dados do Funcionario:</strong>
           </div>
           <div className="form-group form" >
             <label htmlFor="title">Nome:</label>
@@ -162,8 +143,6 @@ const AddFuncionario = () => {
               placeholder="Endereco"
             />
           </div>
-          
-
           <div className="form-group form">
             <label htmlFor="title">Data de Nascimento:</label>
             <input
@@ -175,7 +154,7 @@ const AddFuncionario = () => {
               onChange={handleInputChange}
               name="dataNascimento"
             />
-           <label htmlFor="title">Cart trabalho:</label>
+            <label htmlFor="title">Cart trabalho:</label>
             <input
               type="text"
               className="form-control"
@@ -186,9 +165,8 @@ const AddFuncionario = () => {
               name="cartTrabalho"
             />
           </div>
-            
           <button onClick={savefuncionario} className="mt-5 btn btn-success text-center buttonform">
-            Submit
+            Enviar
           </button>
         </div>
       )}
