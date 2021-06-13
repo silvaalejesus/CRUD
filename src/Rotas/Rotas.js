@@ -23,11 +23,11 @@ const Rotas = () => {
         <Route exact path="/add" component={AddFuncionario} />
         <Route path="/funcionarios/:id" component={Funcionario} />
         {/* Rotas Produtos */}
-        <Route path="/Produto" component={ProdutoList} />
+        <Route path="/produto" component={ProdutoList} />
         <Route exact path="/addProduto" component={AddProduto} />
         <Route path="/Produtos/:id" component={Produto} />
         {/* Rotas Cliente */}
-        <Route path="/cliente" component={ClientesList} />
+        <Route path="/Cliente" component={ClientesList} />
         <Route path="/addCliente" component={AddCliente} />
         <Route path="/Clientes/:id" component={Cliente} />
       </Switch>         

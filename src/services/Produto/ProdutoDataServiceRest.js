@@ -1,26 +1,26 @@
 import http from "../../http-common";
 
 const getAll = () => {
-  return http.get("/Produto");
+  return http.get("/produto");
 };
 const get = id => {
-  return http.get(`/Produto/${id}`);
+  return http.get(`/produto/${id}`);
 };
 const create = data => {
-  return http.post("/Produto", data);
+  return http.post("/produto", data);
 };
 const update = (id, data) => {
-  return http.put(`/Produto/${id}`, data);
+  return http.put(`/produto/${id}`, data);
 };
 const remove = id => {
-  return http.delete(`/Produto/${id}`);
+  return http.delete(`/produto/${id}`);
 };
 //Nao tem esse endpoint no mockAPI
 const removeAll = () => {
-  return http.delete(`/Produto`);
+  return http.delete(`/produto`);
 };
 const findByTitle = title => {
-  return http.get(`/Produto?title=${title}`);
+  return http.get(`/produto?title=${title}`);
 };
 
 const exportedObject = {

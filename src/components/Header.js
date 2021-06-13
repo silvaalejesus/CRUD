@@ -41,8 +41,8 @@ const Header = (props) => {
             </li>
             {isOpenCliente && (
               <div className="menu-dropdown shadow p-3 bg-white rounded mt-4" aria-labelledby="dropdownMenuButton">
-                <Link className="dropdown-item" to="/cliente">Lista Clientes</Link>
-                <Link className=" dropdown-item" to="/addCliente">Adicionar Cliente</Link>
+                <Link className="dropdown-item" to="/Cliente">Lista Pacientes</Link>
+                <Link className=" dropdown-item" to="/addCliente">Adicionar Paciente</Link>
               </div>
             )}
           </div>

@@ -62,10 +62,11 @@ const Produto = props => {
 
   const updateProduto = () => {
     //console.log(currentProduto)
+    
     ProdutoDataService.update(currentProduto.id, currentProduto)
       .then(response => {
         console.log(response);
-        setMessage("The tutorial was updated successfully!");
+        setMessage("Produto atualizado com sucesso!");
       })
       .catch(e => {
         console.log(e);
@@ -78,7 +79,7 @@ const Produto = props => {
       ProdutoDataService.remove(currentProduto.id)
         .then(response => {
           console.log(response.data);
-          props.history.push("/Produto");
+          props.history.push("/produto");
         })
         .catch(e => {
           console.log(e);
@@ -163,7 +164,7 @@ const Produto = props => {
             <button className="btn btn-danger mr-2 text-center" onClick={deleteProduto}>
               Deletar
             </button>
-            <Link to="/Produto">
+            <Link to="/produto">
               <button
                 type="submit"
                 className="btn btn-warning text-center"

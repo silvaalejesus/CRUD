@@ -93,7 +93,7 @@ const ClientesList = () => {
         </div>
         <div className="">
           {/* Lista de pacientes */}
-          <h4>Lista de Clientes</h4>
+          <h4>Lista de Pacientes</h4>
           <table className="table">
             <thead className="thead-dark">
               <tr>

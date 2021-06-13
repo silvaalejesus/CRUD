@@ -110,10 +110,11 @@ const Cliente = props => {
   };
   //Atualizar cliente 
   const updateCliente = () => {
+    
     ClienteDataService.update(currentCliente.id, currentCliente)
       .then(response => {
         console.log(response);
-        setMessage("The tutorial was updated successfully!");
+        setMessage("Paciente atualizado com sucesso!");
       })
       .catch(e => {
         console.log(e);
@@ -251,40 +252,9 @@ const Cliente = props => {
               <option value="14">Reflexologia</option>
               <option value="15">Shantala</option>
             </select>
+            
             <div className="form-group">
-              <label htmlFor="title">Data da consulta:</label>
-              <input
-                type="date"
-                className="form-control"
-                id="title"
-                required
-                value={currentCliente.dataConsulta}
-                onChange={handleInputChange}
-                name="dataConsulta"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="title">Estado Civil:</label>
-              <select className="form-select" aria-label="Default select example" id="title"
-                required value={currentCliente.estadoCivil}
-                onChange={handleInputChange} name="estadoCivil">
-                <option selected>Opções</option>
-                <option value="0">Solteiro</option>
-                <option value="1">Casado</option>
-                <option value="2">Divorciado</option>
-                <option value="3">Viuvo</option>
-              </select>
-              <label htmlFor="title">Profissão:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                required
-                value={currentCliente.profissao}
-                onChange={handleInputChange}
-                name="profissao"
-                placeholder=""
-              />
+
               <label htmlFor="title">Endereço:</label>
               <input
                 type="text"
@@ -297,16 +267,7 @@ const Cliente = props => {
                 placeholder=""
               />
             </div>
-            <div className="form-group">
-              <div className="mb-3">
-                <li htmlFor="exampleFormControlTextarea1" className="form-label"><strong>Queixa principal:</strong></li>
-                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="
-                    Motivo que levou o paciente a procurar ajuda profissional (sintomas e sinais):"
-                  required onChange={handleInputChange} name="queix" value={currentCliente.queix}>
-
-                </textarea>
-              </div>
-            </div>
+            
             <div className="form-group">
               <strong><li>Histórico da queixa:</li></strong>
               <label htmlFor="title">Localização da Dor:</label>
@@ -320,23 +281,7 @@ const Cliente = props => {
                 name="localizacaoDor"
                 placeholder="Local"
               />
-              <label>Nivel do incomodo:</label>
-              <select className="form-select" aria-label="Default select example"
-                id="title" required value={currentCliente.incomodo}
-                onChange={handleInputChange} name="incomodo">
-                <option selected>Opções</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </select>
+              
             </div>
             <div className="form-group">
               <label htmlFor="title">Intensidade:</label>
@@ -363,22 +308,9 @@ const Cliente = props => {
                 name="tempo"
                 placeholder="Tempo da dor"
               />
-              <div className="mb-3">
-                <label htmlFor="exampleFormControlTextarea1" className="form-label">Agravante e melhora da dor?</label>
-                <textarea className="form-control" id="title" required onChange={handleInputChange}
-                  rows="3" nome="comentario" value={currentCliente.comentario} placeholder="
-                    Fale um pouco."></textarea>{/* exampleFormControlTextarea1 */}
-              </div>
+              
             </div>
-            <div className="form-group">
-              <strong><li>Histórico patológico:</li></strong>
-              <div>
-                <input type="radio" id="title" required
-                  onChange={handleInputChange} name="patologia" value={currentCliente.patologia} /> Sim
-                <input type="radio" id="title" required
-                  onChange={handleInputChange} name="patologia" value={currentCliente.patologia} /> Não
-              </div>
-            </div>
+      
             <div className="form-group">
               <label htmlFor="title">Tratamentos já realizados:</label>
               <input
@@ -392,102 +324,8 @@ const Cliente = props => {
                 placeholder=""
               />
             </div>
-            <div className="form-group">
-              <strong><li htmlFor="tilte">Medicamentos em uso:</li></strong>
-              <div>
-                <input type="radio" id="title" required
-                  onChange={handleInputChange} name="med" value={currentCliente.med} /> Sim
-                <input type="radio" id="title" required
-                  onChange={handleInputChange} name="med" value={currentCliente.med} /> Não
-              </div>
-              <div>
-                <label htmlFor="tilte">Quais?</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  required
-                  value={currentCliente.medicamento}
-                  onChange={handleInputChange}
-                  name="medicamento"
-                  placeholder=""
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <li><strong htmlFor="title">Alergias: </strong></li>
-              <div>
-                <input type="radio" id="title" required
-                  onChange={handleInputChange} name="alergia" value={currentCliente.alergias} /> Sim
-                <input type="radio" id="title" required
-                  onChange={handleInputChange} name="alergia" value={currentCliente.alergias} /> Não
-              </div>
-              <div>
-                <label htmlFor="title">Quais?</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  required
-                  value={currentCliente.quaisAlergias}
-                  onChange={handleInputChange}
-                  name="quaisAlergias"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <strong><li htmlFor="title">Histórico familiar:</li></strong>
-              <label htmlFor="title">Alguma ocorrência na família? </label>
-              <div>
-                <input type="radio" id="title" required
-                  onChange={handleInputChange} name="historicoFamiliar" value={currentCliente.historicoFamiliar} /> Sim
-                <input type="radio" id="title" required
-                  onChange={handleInputChange} name="historicoFamiliar" value={currentCliente.historicoFamiliar} /> Não
-              </div>
-              <div>
-                <label htmlFor="title">Fale sobre:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  required
-                  value={currentCliente.ocorrencia}
-                  onChange={handleInputChange}
-                  name="ocorrencia"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="title">Hábitos de vida e o tipo de alimentação:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="title"
-                required
-                value={currentCliente.habitos}
-                onChange={handleInputChange}
-                name="habitos"
-              />
-            </div>
-            <div className="form-group">
-              <strong><li>Histórico psicossocial:</li></strong>
-              <div className="form-group">
-                <label htmlFor="title">Vícios: </label>
-
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1"
-                    required
-                    onChange={handleInputChange} name="vicio" value={currentCliente.vicio} />
-                  <label class="form-check-label" htmlFor="inlineCheckbox1">Tabagismo</label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox2"
-                    required
-                    onChange={handleInputChange} name="vicio" value={currentCliente.vicio} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox2">Alcoolismo</label>
-                </div>
-              </div>
-            </div>
+     
+            
             <div className="form-group">
               <label>
                 <strong>Status:</strong>
@@ -511,21 +349,23 @@ const Cliente = props => {
                 Publicar
               </button>
             )}
+            <Link to="/Cliente">
+              <button className="btn btn-danger mr-2" onClick={deleteCliente}>
+                Deletar
+              </button>
+            </Link>
 
-            <button className="btn btn-danger mr-2" onClick={deleteCliente}>
-              Deletar
-            </button>
-
-            <Link to="/cliente">
+            <a href="/Cliente">
               <button
                 type="submit"
                 className="btn btn-warning"
                 onClick={updateCliente}
               >
-                Update
+                Atualizar
               </button>
-            </Link>
+            </a>
             <p>{message}</p>
+          
           </div>
         </div>
       ) : (

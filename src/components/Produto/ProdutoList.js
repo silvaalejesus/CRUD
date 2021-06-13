@@ -114,7 +114,7 @@ const ProdutoList = () => {
                     <td> <Link to={"/Produtos/" + Produto.id}
                       className="mr-0 btn btn-warning">Editar</Link>
                     </td>
-                    <td> <Link to={"/Produtos"}onClick={() => deleteProduto(Produto.id)}
+                    <td> <Link onClick={() => deleteProduto(Produto.id)}
                       className="mb-0 btn btn-danger">Remover</Link>
                     </td>
                   </tr>

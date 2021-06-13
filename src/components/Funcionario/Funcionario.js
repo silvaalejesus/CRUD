@@ -37,9 +37,7 @@ const Funcionario = props => {
   };
   useEffect(() => {
     getTutorial(props.match.params.id);
-    return () => {
-      setMessage({})
-    }
+    
   }, [props.match.params.id]);
   // useEffect(() => {
   //   const data = FuncionarioDataService.getById(key)
@@ -82,7 +80,7 @@ const Funcionario = props => {
     FuncionarioDataService.update(currentFuncionario.id, currentFuncionario)
       .then(response => {
         console.log(response);
-        setMessage("The tutorial was updated successfully!");
+        setMessage("Funcionario atualizado com sucesso!");
       })
       .catch(e => {
         console.log(e);
@@ -104,7 +102,7 @@ const Funcionario = props => {
 
   return (
     <div>
-      <Header />   
+      <Header />
       {currentFuncionario ? (
 
         <div id="contents">
@@ -227,18 +225,19 @@ const Funcionario = props => {
                 </button>
               </Link>
 
-              <Link className="" to="/funcionario">
+              <a className="" href="/funcionario" >
                 <button
                   type="submit"
                   className=" btn btn-warning"
                   onClick={updateFuncionario}
                 >
-                  Update
+                  Atualizar
                 </button>
-              </Link>
+              </a>
             </div>
           </div>
           <p>{message}</p>
+          
         </div>
       ) : (
         <div>
