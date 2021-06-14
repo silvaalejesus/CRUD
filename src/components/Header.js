@@ -37,7 +37,7 @@ const Header = (props) => {
           </div>
           <div className="d-flex" isOpenCliente={isOpenCliente}>
             <li onClick={() => setIsOpenCliente(!isOpenCliente)} className="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
-              Cliente
+              Paciente
             </li>
             {isOpenCliente && (
               <div className="menu-dropdown shadow p-3 bg-white rounded mt-4" aria-labelledby="dropdownMenuButton">
